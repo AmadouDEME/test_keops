@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to nginx!</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0a0e27;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.code-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  opacity: 0.15;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #667eea;
+}
+
+.code-line {
+  position: absolute;
+  white-space: nowrap;
+  animation: scroll-code 20s linear infinite;
+}
+
+@keyframes scroll-code {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 40px 35px;
+  max-width: 600px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: fadeInUp 0.8s ease-out;
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  animation: float 3s ease-in-out infinite;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.logo svg {
+  width: 40px;
+  height: 40px;
+  fill: white;
+}
+
+h1 {
+  color: #ffffff;
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: slideIn 0.8s ease-out 0.2s both;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #10b981;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 0.9em;
+  font-weight: 600;
+  margin: 0 auto 30px;
+  display: flex;
+  width: fit-content;
+  animation: slideIn 0.8s ease-out 0.3s both;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+p {
+  color: #e2e8f0;
+  font-size: 1.1em;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  animation: slideIn 0.8s ease-out 0.4s both;
+}
+
+.links {
+  display: flex;
+  gap: 15px;
+  margin-top: 35px;
+  flex-wrap: wrap;
+  animation: slideIn 0.8s ease-out 0.5s both;
+}
+
+.link-card {
+  flex: 1;
+  min-width: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  text-decoration: none;
+  padding: 20px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.link-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.link-card:hover::before {
+  left: 100%;
+}
+
+.link-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.link-card h3 {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.link-card p {
+  font-size: 0.85em;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer {
+  text-align: center;
+  margin-top: 35px;
+  padding-top: 25px;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+  animation: slideIn 0.8s ease-out 0.6s both;
+}
+
+.footer em {
+  color: #667eea;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.05em;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: float-particle 15s infinite;
+}
+
+@keyframes float-particle {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(50px);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 40px 30px;
+  }
+  
+  h1 {
+    font-size: 2em;
+  }
+  
+  .links {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+<div class="code-background">
+  <div class="code-line" style="top: 5%; animation-delay: 0s;">print("Hello World") # Python | console.log("Hello") // JavaScript | System.out.println("Hello"); // Java</div>
+  <div class="code-line" style="top: 12%; animation-delay: 3s;">func main() { fmt.Println("Hello") } // Go | echo "I bɛ here"; // Mandingue | def calculate(x, y): return x + y</div>
+  <div class="code-line" style="top: 19%; animation-delay: 6s;">&lt;?php echo "Bonjour"; ?&gt; | SELECT * FROM users; -- SQL | A ka ɲi! // Mandingue salutation</div>
+  <div class="code-line" style="top: 26%; animation-delay: 1s;">fn main() { println!("Hello"); } // Rust | import React from 'react'; | const data = await fetch(url);</div>
+  <div class="code-line" style="top: 33%; animation-delay: 4s;">public class Main { public static void main(String[] args) { } } // Java | I ka kɛnɛya? // Comment vas-tu?</div>
+  <div class="code-line" style="top: 40%; animation-delay: 7s;">#include &lt;iostream&gt; int main() { return 0; } // C++ | puts "Hello" # Ruby | N'ko fɔ! // Ecoute!</div>
+  <div class="code-line" style="top: 47%; animation-delay: 2s;">package main import "fmt" // Go | if (condition) { execute(); } // JavaScript | Aw ni tile! // Bonjour (pluriel)</div>
+  <div class="code-line" style="top: 54%; animation-delay: 5s;">def greet(name): return f"Hello {name}" # Python | An bɛ se ka kuma // Nous pouvons parler</div>
+  <div class="code-line" style="top: 61%; animation-delay: 8s;">CREATE TABLE users (id INT PRIMARY KEY); -- SQL | let result = numbers.map(x => x * 2); // JS</div>
+  <div class="code-line" style="top: 68%; animation-delay: 1.5s;">async function getData() { const res = await api.get(); } // TypeScript | N b'a fɛ! // J'aime ça!</div>
+  <div class="code-line" style="top: 75%; animation-delay: 4.5s;">match value { Some(x) => println!("{}", x), None => () } // Rust | M'ba den! // Mon enfant!</div>
+  <div class="code-line" style="top: 82%; animation-delay: 7.5s;">class User { constructor(name) { this.name = name; } } // JavaScript | I tɔgɔ ko di? // Quel est ton nom?</div>
+  <div class="code-line" style="top: 89%; animation-delay: 2.5s;">for i in range(10): process(i) # Python | UPDATE users SET active=1; -- SQL | An ka kan! // Allons-y!</div>
+  <div class="code-line" style="top: 96%; animation-delay: 5.5s;">import numpy as np; arr = np.array([1,2,3]) # Python | Ala k'i dɛmɛ! // Que Dieu t'aide!</div>
+</div>
+
+<div class="particles">
+  <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+  <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+  <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+  <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
+  <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+  <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+  <div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
+  <div class="particle" style="left: 80%; animation-delay: 4.5s;"></div>
+  <div class="particle" style="left: 90%; animation-delay: 1.5s;"></div>
+</div>
+
+<div class="container">
+  <div class="logo">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 18c-3.86-.91-7-4.83-7-9V8.36l7-3.5 7 3.5V11c0 4.17-3.14 8.09-7 9z"/>
+      <path d="M11 7h2v6h-2zm0 8h2v2h-2z"/>
+    </svg>
+  </div>
+  
+  <h1>Bienvenue sur nginx!</h1>
+  
+  <div class="status-badge">
+    <span class="status-dot"></span>
+    Serveur opérationnel
+  </div>
+  
+  <p>Si vous voyez cette page, le serveur web nginx est installé et fonctionne avec succès. Une configuration supplémentaire est nécessaire.</p>
+  
+  <div class="links">
+    <a href="http://nginx.org/" class="link-card">
+      <h3>📚 Documentation</h3>
+      <p>Documentation en ligne et support</p>
+    </a>
+    
+    <a href="http://nginx.com/" class="link-card">
+      <h3>💼 Support Pro</h3>
+      <p>Support commercial disponible</p>
+    </a>
+  </div>
+  
+  <div class="footer">
+    <em>✨ Merci d'utiliser nginx</em>
+  </div>
+</div>
+</body>
+</html>
